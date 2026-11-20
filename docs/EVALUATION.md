@@ -1,11 +1,12 @@
 # Evaluation status
 
+## Historical status before FaceForge 2.0
 FID: NOT EVALUATED. KID: NOT EVALUATED. Perceptual diversity: NOT EVALUATED. Memorization: NOT EVALUATED. Prior runs produce texture rather than faces; numerical quality scores would not alter that visual finding. An image-level holdout exists but is not identity disjoint. Before a publishable evaluation, freeze a suitable reference split, verify duplicates and identities where metadata permits, use an established metric implementation with documented feature extractor and sample counts, and conduct a private nearest-neighbor review without redistributing source images.
 
-## Recovery outcome
+## Recovery outcome before FaceForge 2.0 metrics
 Visual inspection of actual fixed-noise grids shows recognizable but visibly distorted faces at epoch 15. Local CPU inference from the exported generator produced four 64×64 images in approximately 0.09 s on the test invocation. FID/KID remain NOT EVALUATED. No quantitative diversity, nearest-neighbor, identity leakage or privacy assessment has been completed. The held-out 1,000 images were not used for an established metric.
 
-## FaceForge 2.0 fixed protocol
+## FaceForge 2.0 fixed protocol (pre-measurement plan)
 `configs/evaluation.json` freezes 64×64 preprocessing, seed 20261120, and nominal 1,000 development and 1,000 final generated samples. Both models must use the same real-reference set and clean-fid implementation before numerical comparison. The existing recovery run has only 1,000 image-level held-out images, no identity disjointness and no larger untouched final set. FID would be sample-biased and cannot be called an independent final estimate. FID/KID remain NOT EVALUATED. The 32-image fixed grid is a visual baseline and its pixel L1 dispersion is a limited diagnostic, not an established diversity score.
 
 ## Measured development comparison (FaceForge 2.0)

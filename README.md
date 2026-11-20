@@ -26,7 +26,7 @@ A private Kaggle Tesla T4 run used 2,048 validated CelebA images (1,844 train), 
 
 A follow-up 30-epoch run with discriminator learning rate 0.00005 produced no recognizable faces. A new 10,000-image run produced recognizable face structure by epoch 5; its final output remains noisy. See PROJECT_STATUS.md for configurations and hashes.
 
-The academic 64×64 GAN demonstration now produces recognizable face structures, with visible distortion. The public product is not released. A real browser screenshot of the local generator is in `artifacts/screenshots/studio_generate.png` (private, excluded from Git). The local browser test confirmed generation and the model-quality view. Mobile, download and full browser QA remain open. FID/KID and privacy metrics remain NOT EVALUATED.
+The academic 64×64 GAN demonstration now produces recognizable face structures, with visible distortion. The public product is not released. A real browser screenshot of the local generator is in `artifacts/screenshots/studio_generate.png` (private, excluded from Git). The local browser test confirmed generation and the model-quality view. Mobile, download and full browser QA remain open. Development FID/KID are measured below; privacy remains NOT EVALUATED.
 
 ## FaceForge 2.0 measured comparison
 
