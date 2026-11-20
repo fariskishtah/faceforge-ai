@@ -1,0 +1,15 @@
+{
+  "protocol_version": "faceforge-eval-v1",
+  "resolution": 64,
+  "real_preprocessing": "RGB, centered 178x178 crop of aligned 178x218 CelebA, LANCZOS resize 64x64; uint8 PNG for clean-fid",
+  "fake_preprocessing": "Tanh output mapped from [-1,1] to [0,255] uint8 PNG",
+  "generator_seed": 20261120,
+  "development_sample_count": 1000,
+  "final_sample_count": 1000,
+  "metrics": "clean-fid clean mode, InceptionV3 for FID and KID if installed and both independent sets available",
+  "checkpoint_selection": "development KID plus fixed-seed visual and near-duplicate review; final set untouched until selection",
+  "limitations": "Current 1000 image holdout is image-level only, too small for a stable FID estimate, and not established identity-disjoint. No FID/KID claim until run.",
+  "metric_implementation": "clean-fid 0.1.35, clean mode, InceptionV3, 1000 real / 1000 fake, CUDA Tesla T4",
+  "development_reference": "1000 image-level held-out images from the same 10000-image CelebA manifest; no identity-disjoint guarantee",
+  "final_reference": "NOT PREPARED"
+}

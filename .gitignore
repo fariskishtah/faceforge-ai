@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/
+artifacts/
+*.pt
+*.pth
+.env
+.playwright-cli/
+deployment/**/output/
+deployment/**/download.log
+.DS_Store

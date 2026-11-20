@@ -1,0 +1,5 @@
+# FaceForge AI 2.0 — selected private research model
+
+Selected: original 64×64 DCGAN Generator after 30 epochs and 2,100 cumulative updates. Latent dimension 128, 3,806,080 parameters. Trained on 9,000 CelebA aligned images using Tesla T4. The selected model was extended from the epoch-15 checkpoint with unchanged architecture and optimizer configuration. Fixed-seed outputs contain recognizable low-resolution faces and show more coherent structure than epoch 15, with visible distortion and artifacts.
+
+Development clean-fid 0.1.35 scores against 1,000 image-level held-out CelebA images: FID 176.0718 and KID 0.1750159. These are small-sample comparison scores, not independent final benchmarks. Identity overlap, near duplication, memorization, demographic diversity and privacy have not been audited. CelebA is restricted to non-commercial research, and redistribution rights for derived weights and outputs remain unresolved. The weights are private; generated images may resemble real people and should not be used for impersonation or identity verification.

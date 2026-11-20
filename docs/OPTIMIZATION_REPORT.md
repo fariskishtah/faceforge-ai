@@ -1,0 +1,11 @@
+# FaceForge 2.0 optimization report
+
+## Evidence and choices
+The recovery checkpoint produces recognizable 64×64 faces with strong high-frequency and checkerboard artifacts. The baseline 32-seed grid and measurements are in QUALITY_BASELINE_AUDIT.md. The current architecture uses transposed convolutions with 4×4 kernels and stride 2. Such kernels can yield uneven texture, but no causal attribution of the observed artifacts is established. The initial experiment will keep this architecture and change training exposure only. This is more interpretable than simultaneously adding EMA, augmentation, regularization and a new upsampler.
+
+Research references: PyTorch DCGAN tutorial https://docs.pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html; ADA https://arxiv.org/abs/2006.06676; spectral normalization https://arxiv.org/abs/1802.05957; clean-fid https://github.com/GaParmar/clean-fid. The latter approaches have not been implemented or claimed as results. FID/KID require a fixed real reference and established implementation.
+
+## Controlled training extension
+The first continuation attempt failed before training due to an assumed Kaggle mount path. A second attempt exposed a real resume bug: CUDA RNG state was restored from a GPU tensor, while PyTorch requires CPU ByteTensors. The trainer now moves each state tensor to CPU before `torch.cuda.set_rng_state_all`. The corrected run reused the frozen original manifest, checked 32 image hashes, verified the manifest fingerprint, and resumed from epoch 15 to 30. No architecture, dataset, optimizer, or loss change was introduced. Total updates rose from 1,050 to 2,100; continuation loop time was 860.17 s on Tesla T4.
+
+The extension improved development FID 318.7571→176.0718 and KID 0.3554918→0.1750159 under the same small-reference clean-fid protocol. The fixed-seed grid looks more coherent overall, though some images remain badly distorted. Horizontal adjacent-pixel L1 fell 0.10749→0.08811, a weak high-frequency diagnostic consistent with smoother texture. This controlled comparison supports additional training duration as a contributor to the measured gain. It does not establish that all outputs are realistic. No EMA, spectral normalization, ADA, WGAN-GP, or alternate upsampling architecture was trained; those remain possible future experiments.

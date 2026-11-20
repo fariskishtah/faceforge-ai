@@ -1,0 +1,5 @@
+# Recovery model quality baseline
+
+Checkpoint: `artifacts/kaggle_recovery/run/generator.pt`, SHA-256 `45c25da47ad0e5a30277eb2107933a58f883e54179b211fe60dd78ac02f27f67`. Generator: original DCGAN, width 64, latent 128, 64×64 RGB, Tanh output. Deterministic Gaussian latents: seed 20261120, 32 samples. Grid: `artifacts/quality_baseline/fixed_seed_20261120.png` (private). Inference used model.eval() and torch.no_grad(); visualization maps [-1,1] to [0,1].
+
+Measured raw tensor: min -0.9999987, max 1.0, mean -0.01390, SD 0.65626. Mean within-image SD 0.58253. Mean pairwise pixel L1 distance 0.64128 in [-1,1] units. This is evidence that outputs are not identical at pixel level; it is not a semantic diversity metric. The grid shows recognizable face layouts with strong checkerboard/high-frequency noise, occasional washed-out faces, unstable eye/mouth detail, and color shifts. Some faces look alike. No robust identity or demographic diversity claim can be made. No source photos were used as generated outputs. Baseline weights unchanged.

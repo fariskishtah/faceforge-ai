@@ -1,0 +1,16 @@
+# Dataset audit — pending acquisition
+
+Candidate: CelebA aligned and cropped images. Official source: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html. The authors report 202,599 images and 10,177 identities; use is restricted to non-commercial research. Kaggle mirror: https://www.kaggle.com/datasets/jessicali9530/celeba-dataset . Availability of a mirror is not a license to redistribute. The terms for publicly distributing model weights or generated outputs have not been resolved; no such artifacts should be published without further rights review.
+
+Actual downloaded, usable and excluded counts: NOT MEASURED. Original resolution distribution: NOT MEASURED. The pipeline validates images, hashes exact duplicates, converts to RGB, center crops and resizes to 64 × 64, normalizes to [-1,1], and freezes an image-level manifest. It does not yet perform perceptual deduplication or identity-aware grouping; the test split is not suitable for independent identity-level claims. Do not publish source images or their nearest-neighbor comparisons. Privacy and consent limitations apply.
+
+FFHQ is another possibility: https://github.com/NVlabs/ffhq-dataset . Individual image rights and dataset terms need review; it is not automatically a suitable public model license.
+
+## Local smoke acquisition (20 November 2026)
+16 aligned JPEGs (000001–000016) were downloaded from the Kaggle mirror for a restricted local research smoke test. Validation found 16 unique valid files and zero corrupt or exact duplicate files. The frozen local manifest assigns 15 to training and one to a test split; an image-level split does not prevent identity leakage. Each image is center-cropped to 178 pixels, resized to 64×64, converted to RGB and normalized to [-1,1]. No source images or trained weights are cleared for public redistribution. A sample this small cannot support quality, diversity, or memorization conclusions. Full dataset counts and original dimensions have not been verified locally.
+
+## Kaggle baseline sample
+The private run validated 2,048 selected JPEGs: all were 178×218 pixels, with zero exact SHA-256 duplicates or decoding failures. The frozen manifest records 1,844 image-level training rows and 204 held-out rows. The selected filenames are deterministic aliases of the first 2,048 sorted JPEG paths; the Kaggle dataset version was not pinned and original path mapping was not retained, so exact reconstruction across mirror versions is not established. The held-out set was not used to calculate FID or KID. Identity and perceptual duplicates remain unexamined. The final crop is 178×178 then 64×64. See `artifacts/kaggle_baseline/manifest.json` locally for individual hashes.
+
+## Recovery sample
+A private Kaggle run selected 10,000 aligned CelebA JPEGs from the mirror; validation found 10,000 valid, zero exact SHA-256 duplicates and zero rejected. The image-level split placed 9,000 in training and 1,000 in holdout. Original files were aligned 178×218 JPEGs; preprocessing used a 178×178 center crop, RGB conversion, 64×64 resize and normalization to [-1,1]. The manifest SHA-256 in the checkpoint configuration is `1f28e34e72bb912fbbb37a08954dcf0272d64071e0baed5ff9dd16623122033f`. The mirror version and identity groups were not pinned; no independent metric claim is made. No source photos are published.
